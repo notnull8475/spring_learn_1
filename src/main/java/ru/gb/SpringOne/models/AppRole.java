@@ -12,7 +12,7 @@ public class AppRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "role_name")
     private String name;

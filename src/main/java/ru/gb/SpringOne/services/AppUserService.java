@@ -19,6 +19,7 @@ public class AppUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         AppUser appUser = usersRepository.findByUsername(username).orElseThrow();
         Collection<SimpleGrantedAuthority> authorities = appUser.getRoles().stream().map(it -> {
             return new SimpleGrantedAuthority(it.getName());
