@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springone
+    driver-class-name: org.postgresql.Driver
+    username: springone
+    password: springone
+  jpa:
+    show-sql: true
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yml
+logging:
+  level:
+    root: error

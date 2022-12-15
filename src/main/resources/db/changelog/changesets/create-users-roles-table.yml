@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: auth_3
+      author: dinar
+      changes:
+        - createTable:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: id
+                  type: bigserialcre
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_users_key
+                    referencedTableName: users
+                    referencedColumnNames: id
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_roles_key
+                    referencedTableName: roles
+                    referencedColumnNames: id

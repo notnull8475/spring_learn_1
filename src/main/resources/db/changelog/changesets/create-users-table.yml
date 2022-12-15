@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      author: dinar
+      id: create_users_table
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: firstname
+                  type: varchar(50)
+              - column:
+                  name: lastname
+                  type: varchar(50)
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValueBoolean: true
+              - column:
+                  name: last_entry
+                  type: timestamp
