@@ -30,16 +30,20 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return webSecurity -> webSecurity.ignoring().requestMatchers("/auth", "/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico", "/bootstrap/**", "/h2-console/**","/products");
+        return webSecurity -> webSecurity.ignoring().requestMatchers("/auth", "/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico", "/bootstrap/**", "/h2-console/**", "/products");
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests()
+                .requestMatchers("/api/v1/admin/users")
+                .hasAnyRole("ROOT")
                 .requestMatchers("/api/v1/users")
-                .hasAnyRole("ADMIN","ROOT")
-                .requestMatchers("/api/v1/products/changes/**")
-                .hasAnyRole("ADMIN", "MANAGER","ROOT")
+                .hasAnyRole("ADMIN", "ROOT")
+                .requestMatchers("/api/v1/admin/products")
+                .hasAnyRole("MANAGER", "ROOT")
+                .requestMatchers("/api/v1/products")
+                .permitAll()
                 .and()
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .build();

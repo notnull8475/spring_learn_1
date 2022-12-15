@@ -1,6 +1,8 @@
 package ru.gb.SpringOne.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,7 +34,15 @@ public class AppUserService implements UserDetailsService {
     }
 
 
-    public void saveUser(AppUser appUser){
+    public void saveUser(AppUser appUser) {
 
+    }
+
+    public Page<AppUser> getUsers(int rows, int page) {
+        return usersRepository.findAll(PageRequest.of(page, rows));
+    }
+
+    public AppUser getUserById(Long id) {
+        return usersRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Пользователь с id " + id + " не найден"));
     }
 }
